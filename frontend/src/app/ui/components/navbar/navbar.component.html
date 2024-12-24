@@ -1,0 +1,41 @@
+<style>
+    .logo {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .logo i {
+        font-size: 1.2em;
+        margin-right: 0.2em;
+    }
+
+    .navbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-family: 1.2em;
+        margin-bottom: 2em;
+    }
+
+    a:not(:last-child) {
+        margin-inline-end: 1.2em;
+    }
+</style>
+
+<div class="navbar">
+    <a href="/" class="logo"><i class="uil uil-box"></i> Courier.NET</a>
+    <nav>
+        <a href="/">Home</a>
+        <a href="/login" class="button" *ngIf="!accountService.isAuthenticated"
+            >Sign In</a
+        >
+        <a
+            href="/dashboard"
+            class="button"
+            *ngIf="accountService.isAuthenticated"
+        >
+            Dashboard
+        </a>
+    </nav>
+</div>

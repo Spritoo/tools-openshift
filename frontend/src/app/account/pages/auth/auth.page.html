@@ -1,0 +1,119 @@
+<section class="login">
+    <h2>Sign In</h2>
+    <form [formGroup]="forms.login" (ngSubmit)="onSubmitLogin()">
+        <div class="error" *ngFor="let error of errors.login">{{ error }}</div>
+        <div class="group">
+            <label for="login_email">Email</label>
+            <input type="email" id="login_email" formControlName="email" />
+        </div>
+        <div class="group">
+            <label for="login_password">Password</label>
+            <input
+                type="password"
+                id="login_password"
+                formControlName="password"
+            />
+        </div>
+        <input type="submit" class="button" value="Sign In" />
+    </form>
+</section>
+<div class="separator"></div>
+<section class="register">
+    <h2>Sign Up</h2>
+    <form [formGroup]="forms.register" (ngSubmit)="onSubmitRegister()">
+        <div class="error" *ngFor="let error of errors.register">
+            {{ error }}
+        </div>
+        <div class="group">
+            <label for="register_name">Name</label>
+            <input type="text" id="register_name" formControlName="name" />
+        </div>
+        <div class="group">
+            <label for="register_email">Email</label>
+            <input type="email" id="register_email" formControlName="email" />
+        </div>
+        <div class="group">
+            <label for="register_phone">Phone</label>
+            <input type="tel" id="register_phone" formControlName="phone" />
+        </div>
+        <div class="group">
+            <label for="password">Password</label>
+            <input
+                type="password"
+                id="register_password"
+                formControlName="password"
+            />
+        </div>
+        <input type="submit" class="button" value="Sign Up" />
+    </form>
+</section>
+
+<style>
+    :host {
+        display: flex;
+        flex-grow: 1;
+        align-items: flex-start;
+    }
+
+    .separator {
+        background: rgb(140, 140, 140);
+        width: 1px;
+        height: 100%;
+        margin: 0 2em;
+    }
+
+    form,
+    .group,
+    section {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .login {
+        width: 35%;
+    }
+
+    .register {
+        flex-grow: 1;
+    }
+
+    .group:not(:last-child) {
+        margin-bottom: 1em;
+    }
+
+    label {
+        font-size: 1.2em;
+        font-weight: 200;
+        margin-bottom: 0.6em;
+    }
+
+    input[type='text'],
+    input[type='password'],
+    input[type='email'],
+    input[type='tel'] {
+        border: 0;
+        background-color: transparent;
+        font: inherit;
+        color: inherit;
+        outline: none;
+        border: 1px solid rgb(110, 110, 110);
+        border-radius: 4px;
+        font-size: 1em;
+        padding: 0.4em;
+    }
+
+    .button {
+        padding: 0.6em 1.2em;
+    }
+
+    input.ng-invalid:not(.ng-untouched) {
+        border-color: #ff4242;
+    }
+
+    .error {
+        background-color: #e24848;
+        padding: 0.6em;
+        margin-bottom: 0.8em;
+        border-radius: 4px;
+    }
+</style>

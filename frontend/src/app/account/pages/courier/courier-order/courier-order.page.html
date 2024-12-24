@@ -1,0 +1,60 @@
+<!-- eslint-disable prettier/prettier -->
+<h2>Manage Orders</h2>
+<table>
+    <thead>
+        <tr>
+            <th>Order ID</th>
+            <th>Status</th>
+            <th>Pickup Location</th>
+            <th>Destination</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let order of orders$ | async">
+            <td>{{ order.id }}</td>
+            <td>{{ order.status }}</td>
+            <td>
+                {{ order.pickupLocation.city }}, {{ order.pickupLocation.address
+                }}
+            </td>
+            <td>
+                {{ order.destination.city }}, {{ order.destination.address }}
+            </td>
+            <td>
+                <button (click)="acceptOrder(order.id)">
+                    accept
+                </button>
+                <button (click)="cancelOrder(order.id)">cancel</button>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<style>
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+    }
+
+    th,
+    td {
+        padding: 10px;
+        border: 1px solid #ddd;
+        text-align: center;
+    }
+
+    button {
+        margin: 0 5px;
+        padding: 5px 10px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background-color: #0056b3;
+    }
+</style>

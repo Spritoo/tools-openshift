@@ -1,0 +1,62 @@
+<!-- eslint-disable prettier/prettier -->
+<h1>Hello {{accountService.user?.name}}</h1>
+<div class="admin-buttons">
+    <div class="managment">
+        <button (click)="goToAssignedOrders()">Assigned Orders Page</button>
+        <button (click)="goToUpdateOrdersStatus()">Update Order Status</button>
+    </div>
+    <button class="logout-btn" (click)="accountService.logout()">Logout</button>
+    <router-outlet></router-outlet>
+</div>
+
+<style>
+    /* Center align the content */
+    h1 {
+        text-align: center;
+        font-size: 2em;
+        color: #333;
+        margin-top: 20px;
+    }
+
+    /* Container for buttons */
+    .admin-buttons {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        margin-top: 30px;
+    }
+
+    /* Container for management buttons */
+    .managment {
+        display: flex;
+        gap: 10px;
+    }
+
+    /* General button styling */
+    button {
+        padding: 10px 20px;
+        font-size: 1em;
+        color: #fff;
+        background-color: #007bff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+    /* Hover effect for buttons */
+    button:hover {
+        background-color: #0056b3;
+    }
+
+    /* Special styling for the logout button */
+    .logout-btn {
+        background-color: #dc3545;
+    }
+
+    .logout-btn:hover {
+        background-color: #c82333;
+    }
+</style>
+

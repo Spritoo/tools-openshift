@@ -1,0 +1,54 @@
+<div class="jumbotron">
+    <div class="content">
+        <div class="slogan">You sell.<br />We deliver.</div>
+        <a href="#">Start shipping products</a>
+    </div>
+</div>
+
+<style>
+    :host {
+        flex-grow: 1;
+    }
+
+    .jumbotron {
+        background-image: url('/assets/img/home_jumbotron.jpg');
+        background-position: center left;
+        background-size: cover;
+        height: 80%;
+        text-shadow: 3px 1px rgba(0, 0, 0, 0.5);
+    }
+
+    .jumbotron .content {
+        background-color: rgba(0, 0, 0, 0.2);
+        backdrop-filter: blur(4px);
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        align-items: flex-start;
+        padding-left: 8%;
+        padding-bottom: 4%;
+    }
+
+    .jumbotron .content .slogan {
+        font-size: 4em;
+        line-height: 1.4em;
+        font-weight: 500;
+        margin-bottom: 0.4em;
+    }
+
+    .jumbotron .content a {
+        padding: 0.3em 0.5em;
+        padding-top: 0;
+        color: #03a3ff;
+        border-bottom: 2px solid #03a3ff;
+        font-size: 1.5em;
+    }
+
+    .jumbotron .content a:hover {
+        color: #66d3f5;
+        border-color: #66d3f5;
+        transition: 300ms;
+    }
+</style>

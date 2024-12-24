@@ -1,0 +1,236 @@
+<!-- eslint-disable prettier/prettier -->
+ <div class="content">
+<h1>Create New Order</h1>
+
+<!-- Success and error messages with rectangles -->
+<div
+  *ngIf="submissionStatus || errorMessage"
+  class="status-message"
+  [ngClass]="{
+    success: messageType === 'success',
+    error: messageType === 'error'
+  }"
+  (click)="hideMessageOnInteraction()"
+  (keydown)="hideMessageOnInteraction($event)"
+  tabindex="0"
+>  <!-- Makes the div focusable for keyboard events -->
+  <p *ngIf="submissionStatus">{{ submissionStatus }}</p>
+  <p *ngIf="errorMessage">{{ errorMessage }}</p>
+</div>
+
+<form [formGroup]="orderForm" (ngSubmit)="createOrder()" (click)="hideMessageOnInteraction()" (keydown)="hideMessageOnInteraction($event)">
+    <div formArrayName="items" *ngFor="let item of items.controls; let i = index">
+        <h3>Item {{ i + 1 }}</h3>
+        <div [formGroupName]="i" class="form-group item-entry">
+            <label for="itemName-{{i}}">Item Name</label>
+            <input
+                type="text"
+                id="itemName-{{i}}"
+                formControlName="name"
+                placeholder="Enter item name"
+                required
+            />
+            <label for="itemQuantity-{{i}}">Quantity</label>
+            <input
+                type="number"
+                id="itemQuantity-{{i}}"
+                formControlName="quantity"
+                min="1"
+                placeholder="Enter quantity"
+                required
+            />
+        </div>
+    </div>
+    <button type="button" (click)="addItem()">Add Another Item</button>
+
+    <div class="form-group">
+        <label for="totalWeight">Total Weight (kg)</label>
+        <input
+            type="number"
+            id="totalWeight"
+            formControlName="totalWeight"
+            min="1"
+            placeholder="Enter total weight"
+            required
+        />
+    </div>
+
+    <div class="form-group" formGroupName="pickupLocation">
+        <h3>Pickup Location</h3>
+        <label for="pickupAddress">Address</label>
+        <input
+            type="text"
+            id="pickupAddress"
+            formControlName="address"
+            placeholder="Enter pickup address"
+            required
+        />
+        <label for="pickupCity">City</label>
+        <input
+            type="text"
+            id="pickupCity"
+            formControlName="city"
+            placeholder="Enter pickup city"
+            required
+        />
+    </div>
+
+    <div class="form-group" formGroupName="destination">
+        <h3>Destination</h3>
+        <label for="destinationAddress">Address</label>
+        <input
+            type="text"
+            id="destinationAddress"
+            formControlName="address"
+            placeholder="Enter destination address"
+            required
+        />
+        <label for="destinationCity">City</label>
+        <input
+            type="text"
+            id="destinationCity"
+            formControlName="city"
+            placeholder="Enter destination city"
+            required
+        />
+    </div>
+
+    <div class="form-group">
+        <label for="deliveryTime">Delivery Time</label>
+        <input
+            type="datetime-local"
+            id="deliveryTime"
+            formControlName="deliveryTime"
+        />
+    </div>
+
+    <div class="form-group">
+        <label for="receiverPhone">Receiver Phone</label>
+        <input
+            type="tel"
+            id="receiverPhone"
+            formControlName="receiverPhone"
+            placeholder="Enter receiver phone number"
+            required
+        />
+    </div>
+
+    <button type="submit">Create Order</button>
+</form>
+</div>
+
+
+<style>
+    * {
+    box-sizing: border-box;
+}
+
+.content {
+    font-family: Arial, sans-serif;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    min-width: 80vw;
+    width: 100%;
+}
+
+h1 {
+    text-align: center;
+    color: #ffffff;
+}
+
+.success-message {
+    color: green;
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+.error-message {
+    color: red;
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+/* Status Message Styles */
+.status-message {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  padding: 15px;
+  text-align: center;
+  color: white;
+  font-weight: bold;
+  z-index: 1000; /* Ensure it's on top of other content */
+  transition: opacity 0.5s ease-in-out;
+}
+
+.status-message.success {
+  background-color: green;
+}
+
+.status-message.error {
+  background-color: red;
+}
+
+.status-message p {
+  margin: 0;
+}
+
+
+form {
+    background-color: #31303049;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+}
+
+label {
+    margin-bottom: 5px;
+    color: #f3f3f3;
+}
+
+input[type="text"],
+input[type="number"],
+input[type="datetime-local"],
+input[type="tel"] {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin-bottom: 10px;
+}
+
+button {
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+.items-list {
+    margin-top: 10px;
+    padding: 10px;
+    border: 1px dashed #007bff;
+    border-radius: 4px;
+    color: #333;
+}
+
+h3 {
+    margin-bottom: 5px;
+    color: #007bff;
+}
+</style>

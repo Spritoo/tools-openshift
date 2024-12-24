@@ -1,0 +1,100 @@
+<!-- eslint-disable prettier/prettier -->
+<div class="container">
+    <!-- Left Section: Drivers List -->
+    <div class="left-section">
+        <h2>Drivers</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let driver of drivers$ | async">
+                    <td>{{ driver.id }}</td>
+                    <td>{{ driver.name }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Right Section: Assigned Orders with Reassignment Option -->
+    <div class="right-section">
+        <h2>Current Orders</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Order ID</th>
+                    <th>Status</th>
+                    <th>Pickup Location</th>
+                    <th>Destination</th>
+                    <th>Driver ID</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let order of assignedOrders$ | async">
+                    <td>{{ order.id }}</td>
+                    <td>{{ order.status }}</td>
+                    <td>
+                        {{ order.pickupLocation.city }}, {{ order.pickupLocation.address
+                        }}
+                    </td>
+                    <td>
+                        {{ order.destination.city }}, {{ order.destination.address }}
+                    </td>
+                    <td>{{ order.driverId }}</td>
+                    <td>
+                        <label for="reassignDriver">Reassign Driver:</label>
+                        <select id="reassignDriver" [(ngModel)]="selectedDriverId">
+                            <option *ngFor="let driver of drivers$ | async" [value]="driver.id">
+                                {{ driver.name }}
+                            </option>
+                        </select>
+                        <button (click)="reassignOrder(order.id, selectedDriverId)">
+                            Update
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<style>
+    .container {
+    display: flex;
+    gap: 20px;
+}
+
+.left-section,
+.right-section {
+    flex: 1;
+}
+table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+    }
+
+    th,
+    td {
+        padding: 10px;
+        border: 1px solid #ddd;
+        text-align: center;
+    }
+
+    button {
+        margin: 0 5px;
+        padding: 5px 10px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background-color: #0056b3;
+    }
+</style>
